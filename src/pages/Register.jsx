@@ -1,13 +1,14 @@
 import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import AuthContext from '../context/authContext'; // Make sure this path is correct
+// Fix the import casing to match the file name 'AuthContext.jsx'
+import AuthContext from '../context/authContext';
 
 const Register = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');
   const [formError, setFormError] = useState(''); // Local form error
-  const { register, error: authError, loading } = useContext(AuthContext); // Get context
+  const { register, errors: authError, loading } = useContext(AuthContext); // Get context
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -21,11 +22,14 @@ const Register = () => {
 
     try {
       // Call the register function from the context
+      // Pass an object with username, email, password
       await register(username, email, password);
       
-      // On success, AuthContext will handle the navigation
-      // If it doesn't, you can force it here, but context should handle it:
-      // navigate('/dashboard'); 
+      // On success, AuthContext should handle navigation
+      // We check for authError *after* await
+      if (!authError) {
+         navigate('/'); // Manually navigate if context doesn't
+      }
 
     } catch (err) {
       // Error is already set in AuthContext
@@ -34,21 +38,21 @@ const Register = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-[calc(100vh-64px)] bg-gray-100">
-      <div className="w-full max-w-md p-8 space-y-6 bg-white rounded-lg shadow-md">
-        <h2 className="text-2xl font-bold text-center text-gray-900">
+    <div className="flex items-center justify-center min-h-[calc(100vh-64px)] bg-gray-900">
+      <div className="w-full max-w-md p-8 space-y-6 bg-gray-800 rounded-lg shadow-xl">
+        <h2 className="text-2xl font-bold text-center text-white">
           Create your account
         </h2>
         <form onSubmit={handleSubmit} className="space-y-6">
           {/* Show auth error from context */}
-          {authError && <p className="text-sm text-red-600 text-center">{authError}</p>}
+          {authError && <p className="text-sm text-red-400 text-center">{authError}</p>}
           {/* Show local form error */}
-          {formError && <p className="text-sm text-red-600 text-center">{formError}</p>}
+          {formError && <p className="text-sm text-red-400 text-center">{formError}</p>}
 
           <div>
             <label
               htmlFor="username"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-gray-300"
             >
               Username
             </label>
@@ -60,7 +64,7 @@ const Register = () => {
               required
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              className="w-full px-3 py-2 mt-1 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+              className="w-full px-3 py-2 mt-1 bg-gray-700 border border-gray-600 rounded-md shadow-sm text-gray-200 placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
               placeholder="yourusername"
             />
           </div>
@@ -68,7 +72,7 @@ const Register = () => {
           <div>
             <label
               htmlFor="email"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-gray-300"
             >
               Email address
             </label>
@@ -80,7 +84,7 @@ const Register = () => {
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-3 py-2 mt-1 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+              className="w-full px-3 py-2 mt-1 bg-gray-700 border border-gray-600 rounded-md shadow-sm text-gray-200 placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
               placeholder="you@example.com"
             />
           </div>
@@ -88,7 +92,7 @@ const Register = () => {
           <div>
             <label
               htmlFor="password"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-gray-300"
             >
               Password
             </label>
@@ -100,7 +104,7 @@ const Register = () => {
               required
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-3 py-2 mt-1 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+              className="w-full px-3 py-2 mt-1 bg-gray-700 border border-gray-600 rounded-md shadow-sm text-gray-200 placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
               placeholder="••••••••"
             />
           </div>
@@ -116,11 +120,11 @@ const Register = () => {
           </div>
         </form>
 
-        <p className="text-sm text-center text-gray-600">
+        <p className="text-sm text-center text-gray-400">
           Already have an account?{' '}
           <Link
             to="/login"
-            className="font-medium text-indigo-600 hover:text-indigo-500"
+            className="font-medium text-indigo-400 hover:text-indigo-300"
           >
             Sign In
           </Link>

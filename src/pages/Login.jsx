@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import AuthContext from '../context/authContext';
+// Fix: Corrected the casing of the import to match the file name
+import AuthContext from '../context/authContext.jsx';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -106,3 +107,4 @@ const Login = () => {
 };
 
 export default Login;
+

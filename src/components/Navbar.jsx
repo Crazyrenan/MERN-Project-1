@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import AuthContext from '../context/authContext';
+// Use DEFAULT import (no curly braces) and add .jsx extension
+import { AuthContext } from '../context/authContext.jsx';
 
 function Navbar() {
   // Get user and logout function from our Auth context
@@ -27,7 +28,8 @@ function Navbar() {
             // Links to show WHEN LOGGED IN
             <>
               <span className="text-gray-300 hidden sm:block">
-                Hi, {user.email}
+                {/* Use user.username or user.email if available */}
+                Hi, {user?.username || user?.email}
               </span>
               <button
                 onClick={handleLogout}
