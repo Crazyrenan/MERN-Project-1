@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 // Fix the import casing to match the file name 'AuthContext.jsx'
-import AuthContext from '../context/authContext';
+import AuthContext from '../context/AuthContext.jsx';
 
 const Register = () => {
   const [email, setEmail] = useState('');

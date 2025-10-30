@@ -1,16 +1,15 @@
 import React, { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 // Use DEFAULT import (no curly braces) and add .jsx extension
-import { AuthContext } from '../context/authContext.jsx';
+import AuthContext from '../context/AuthContext.jsx';
 
 function Navbar() {
-  // Get user and logout function from our Auth context
   const { user, logout } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleLogout = () => {
     logout();
-    // Redirect to login page after logout
+
     navigate('/login');
   };
 

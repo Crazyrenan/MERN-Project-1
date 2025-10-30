@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 // Fix: Corrected the casing of the import to match the file name
-import AuthContext from '../context/authContext.jsx';
+import AuthContext from '../context/AuthContext.jsx';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -25,7 +25,6 @@ const Login = () => {
     } catch (err) {
       // Error is already set in AuthContext, but we can log it
       console.error("Login failed:", err);
-      // authError will be updated by the context, no need to setFormError here
     }
   };
 
