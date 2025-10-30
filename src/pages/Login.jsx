@@ -21,9 +21,8 @@ const Login = () => {
 
     try {
       await login(email, password);
-      // The context handles navigation on success
+
     } catch (err) {
-      // Error is already set in AuthContext, but we can log it
       console.error("Login failed:", err);
     }
   };
