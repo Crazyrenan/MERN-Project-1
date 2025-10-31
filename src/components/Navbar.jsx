@@ -38,7 +38,6 @@ function Navbar() {
               </button>
             </>
           ) : (
-            // Links to show WHEN LOGGED OUT
             <>
               <Link
                 to="/login"
